@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: data types related to time
+  version: "${project.version}"
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers: []
+paths: {}
+components:
+  schemas:
+    YearQuarter:
+      description: '[quarter in a Gregorian Calendar Year](https://en.wikipedia.org/wiki/Calendar_year#Quarters) with the year included'
+      type: string
+      pattern: '^[0-9]{4}Q(1|2|3|4)$'
+      example: '2020Q1'
+    Quarter:
+      description: '[quarter in a Gregorian Calendar Year](https://en.wikipedia.org/wiki/Calendar_year#Quarters)'
+      type: integer
+      minimum: 1
+      maximum: 4
+    IncompleteDate:
+      description: Flexible date type that allows the absence of an exact day or month.
+        Format yyyy-mm-dd, yyyy-mm-00 or yyyy-00-00
+      type: string
+      pattern: '^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$'
+    Period:
+      description: period from start to end date. Both start and end dates are mandatory.
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - startDate
+        - endDate
+    PeriodOptionalEnd:
+      description: period from mandatory start to optional end date.
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - startDate
+    YearQuarterPeriod:
+      description: period from start quarter to end quarter. Both start and end quarters are mandatory.
+      type: object
+      properties:
+        startYearQuarter:
+          $ref: '#/components/schemas/YearQuarter'
+        endYearQuarter:
+          $ref: '#/components/schemas/YearQuarter'
+      required:
+        - startYearQuarter
+        - endYearQuarter
+    YearQuarterPeriodOptionalEnd:
+      description: period from mandatory start quarter to optional end quarter.
+      type: object
+      properties:
+        startYearQuarter:
+          $ref: '#/components/schemas/YearQuarter'
+        endYearQuarter:
+          $ref: '#/components/schemas/YearQuarter'
+      required:
+        - startYearQuarter
+    YearMonth:
+      description: A month of a year
+      type: string
+      pattern: '^[0-9]{4}-[0-1][0-9]$'
+      example: '2020-01'
+    Year:
+      description: A year in the Gregorian Calendar
+      type: integer
+      minimum: 1
+      maximum: 9999
+      example: 2020
