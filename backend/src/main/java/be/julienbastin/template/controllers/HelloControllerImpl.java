@@ -16,7 +16,7 @@ public class HelloControllerImpl implements HelloController {
     }
 
     @Override
-    public ResponseEntity<HelloWorldDto> helloWorld() throws Exception {
-        return ResponseEntity.ok(new HelloWorldDto(helloService.hello()));
+    public ResponseEntity<HelloWorldDto> helloWorld(String key) throws Exception {
+        return ResponseEntity.ok(new HelloWorldDto(helloService.hello(key)));
     }
 }

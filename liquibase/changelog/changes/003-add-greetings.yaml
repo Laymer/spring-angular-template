@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: "002"
+      author: bastinjul
+      changes:
+        - insert:
+            schemaName: template
+            tableName: greeting
+            columns:
+              - column:
+                  name: key
+                  value: "default"
+              - column:
+                  name: message
+                  value: "Welcome"
+        - insert:
+            schemaName: template
+            tableName: greeting
+            columns:
+              - column:
+                  name: key
+                  value: "hello"
+              - column:
+                  name: message
+                  value: "Hello World!"

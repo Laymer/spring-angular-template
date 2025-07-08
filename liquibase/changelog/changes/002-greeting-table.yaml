@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: "001"
+      author: bastinjul
+      changes:
+        - createTable:
+            tableName: greeting
+            schemaName: template
+            columns:
+              - column:
+                  name: key
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: message
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

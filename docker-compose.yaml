@@ -21,3 +21,44 @@ services:
         -XX:+HeapDumpOnOutOfMemoryError 
         -XX:HeapDumpPath=/heapdump.hprof
       SPRING_OPTS: "--spring.profiles.active=local"
+      DB_USER: $DB_USER
+      DB_PWD: $DB_PWD
+      DB_NAME: $DB_NAME
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_SCHEMA: template
+    depends_on:
+      liquibase:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: "pattern-db"
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PWD
+      POSTGRES_DB: $DB_NAME
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $DB_USER -d $DB_NAME" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  liquibase:
+    container_name: "pattern-liquibase"
+    image: "liquibase:latest"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./liquibase/changelog:/liquibase/changelog
+      - ./liquibase/liquibase.properties:/liquibase/liquibase.properties
+    environment:
+      LIQUIBASE_COMMAND_URL: jdbc:postgresql://db:5432/$DB_NAME
+      LIQUIBASE_COMMAND_USERNAME: $DB_USER
+      LIQUIBASE_COMMAND_PASSWORD: $DB_PWD
+    command: ["--defaults-file=/liquibase/liquibase.properties", "update"]

@@ -34,7 +34,8 @@ public class SecurityConfiguration {
                 .securityMatcher(requestMatcher)
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest()
-                        .authenticated())
+//                        .authenticated()) //TODO
+                        .permitAll())
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
 //                .oauth2Login(Customizer.withDefaults()) TODO

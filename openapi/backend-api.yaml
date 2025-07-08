@@ -12,13 +12,22 @@ tags:
 paths:
   /health:
     $ref: "belgif/common/v1/common-v1.yaml#/paths/~1health"
-  /hello:
+  /hello/{key}:
     get:
       operationId: helloWorld
       description: First operation in an API for the tests
       summary: Hello world
       tags:
         - Hello
+      parameters:
+        - name: key
+          in: path
+          required: true
+          description: Key of the greeting message
+          schema:
+            type: string
+            maxLength: 50
+            minLength: 1
       responses:
         "200":
           description: Ok
