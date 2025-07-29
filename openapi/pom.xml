@@ -69,6 +69,15 @@
                             <arguments>run redocly.build-docs</arguments>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>Bundle API into one file</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run redocly.bundle</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>

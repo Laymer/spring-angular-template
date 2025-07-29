@@ -1,0 +1,17 @@
+<main class="main">
+  <div class="container">
+    <form (ngSubmit)="getHelloWorldMessage()" #form="ngForm" class="p-3">
+      <div class="mb-3">
+        <label for="message" class="form-label">Your input message</label>
+        <input type="text" id="message" class="form-control" [(ngModel)]="inputMessage" name="message" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Get Greetings</button>
+    </form>
+
+    <h1>Message returned by the backend: {{ message() }}</h1>
+  </div>
+</main>
+
+
+<router-outlet />

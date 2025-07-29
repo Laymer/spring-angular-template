@@ -27,6 +27,7 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_SCHEMA: template
+      ALLOWED_CORS: "http://localhost:4200;http://localhost:8080"
     depends_on:
       liquibase:
         condition: service_completed_successfully
@@ -62,3 +63,17 @@ services:
       LIQUIBASE_COMMAND_USERNAME: $DB_USER
       LIQUIBASE_COMMAND_PASSWORD: $DB_PWD
     command: ["--defaults-file=/liquibase/liquibase.properties", "update"]
+
+  frontend:
+    container_name: "pattern-frontend"
+    image: node:24
+    ports:
+      - "4200:4200"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - node_modules_cache:/app/node_modules
+    command: sh -c "npm i && npm run start"
+
+volumes:
+  node_modules_cache:

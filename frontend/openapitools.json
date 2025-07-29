@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.14.0",
+    "generators": {
+      "angular": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "../openapi/backend-api.yaml",
+        "modelNameSuffix": "Dto",
+        "output": "src/app/core/rest-client",
+        "additionalProperties": {
+          "ngVersion": "20.1.0",
+          "npmName": "restClient",
+          "supportsES6": "true",
+          "npmVersion": "10.9.2",
+          "withInterfaces": true,
+          "modelFileSuffix": "Dto",
+          "modelSuffix": "Dto"
+        }
+      }
+    }
+  }
+}

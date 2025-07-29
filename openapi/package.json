@@ -2,7 +2,8 @@
   "name": "spring-angular-template",
   "version": "1.0.0",
   "scripts": {
-    "redocly.build-docs": "redocly build-docs backend-api.yaml --output=target/backend-api-docs.html"
+    "redocly.build-docs": "redocly build-docs backend-api.yaml --output=target/backend-api-docs.html",
+    "redocly.bundle": "redocly bundle backend-api.yaml -o target/backend-api-bundled.yaml"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,6 @@
   "homepage": "https://github.com/bastinjul/spring-angular-template#readme",
   "description": "",
   "dependencies": {
-    "@redocly/cli": "^1.34.4"
+    "@redocly/cli": "^2.0.1"
   }
 }
