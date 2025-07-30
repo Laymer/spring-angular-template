@@ -27,7 +27,7 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_SCHEMA: template
-      ALLOWED_CORS: "http://localhost:4200;http://localhost:8080"
+      ALLOWED_CORS: "http://localhost:4200;http://localhost:8080;http://localhost:8090"
     depends_on:
       liquibase:
         condition: service_completed_successfully
@@ -74,6 +74,14 @@ services:
       - ./frontend:/app
       - node_modules_cache:/app/node_modules
     command: sh -c "npm i && npm run start"
+
+  frontend-nginx:
+    container_name: "pattern-frontend-nginx"
+    image: "local/template/frontend-nginx"
+    build:
+      context: frontend
+    ports:
+      - "8090:80"
 
 volumes:
   node_modules_cache:
